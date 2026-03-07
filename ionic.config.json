@@ -1,0 +1,7 @@
+{
+  "name": "code_gentic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
