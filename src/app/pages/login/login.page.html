@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <ion-list lines="full">
+      <ion-item>
+        <ion-input
+          label="Email"
+          labelPlacement="stacked"
+          type="email"
+          inputmode="email"
+          autocomplete="email"
+          formControlName="email"
+        ></ion-input>
+      </ion-item>
+      @if ((submitted || loginForm.controls.email.touched) && loginForm.controls.email.invalid) {
+        <ion-text color="danger" class="error">
+          @if (loginForm.controls.email.errors?.['required']) {
+            <span>Email is required.</span>
+          } @else if (loginForm.controls.email.errors?.['email']) {
+            <span>Enter a valid email.</span>
+          }
+        </ion-text>
+      }
+
+      <ion-item>
+        <ion-input
+          label="Password"
+          labelPlacement="stacked"
+          type="password"
+          autocomplete="current-password"
+          formControlName="password"
+        ></ion-input>
+      </ion-item>
+      @if ((submitted || loginForm.controls.password.touched) && loginForm.controls.password.invalid) {
+        <ion-text color="danger" class="error">
+          <span>Password is required.</span>
+        </ion-text>
+      }
+    </ion-list>
+
+    <ion-button
+      type="submit"
+      expand="block"
+      class="ion-margin-top"
+      [disabled]="loginForm.invalid"
+    >
+      Sign in
+    </ion-button>
+  </form>
+</ion-content>
