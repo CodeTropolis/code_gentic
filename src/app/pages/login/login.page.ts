@@ -6,7 +6,7 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonItem,
+  IonLabel,
   IonInput,
   IonButton,
   IonText,
@@ -22,7 +22,7 @@ import {
     IonToolbar,
     IonTitle,
     IonContent,
-    IonItem,
+    IonLabel,
     IonInput,
     IonButton,
     IonText,
@@ -33,10 +33,18 @@ import {
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
 
-  readonly form = this.fb.nonNullable.group({
+  readonly form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+
+  get emailCtrl() {
+    return this.form.controls.email;
+  }
+
+  get passwordCtrl() {
+    return this.form.controls.password;
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -44,11 +52,8 @@ export class LoginPage {
       return;
     }
 
-    console.log('Login submit:', this.form.getRawValue());
-  }
-
-  isInvalid(controlName: 'email' | 'password'): boolean {
-    const c = this.form.controls[controlName];
-    return c.invalid && (c.dirty || c.touched);
+    // Proof-of-concept: log the form value
+    // eslint-disable-next-line no-console
+    console.log('Login submit:', this.form.value);
   }
 }

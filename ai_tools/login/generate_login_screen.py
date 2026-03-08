@@ -11,21 +11,13 @@ Run from project root:
 
 import json
 import re
-from dataclasses import dataclass
 from pathlib import Path
 
+from ai_tools.login.prompt import login_prompt
+from ai_tools.types.generated_file import GeneratedFile
+from ai_tools.utils.validate_files import validate_files
 from ai_tools.utils.project_root import find_project_root
 from ai_tools.utils.openai_client import generate
-
-
-# --------------------------------------------------
-# DATA STRUCTURES
-# --------------------------------------------------
-
-@dataclass
-class GeneratedFile:
-    path: str
-    content: str
 
 
 # --------------------------------------------------
@@ -43,75 +35,28 @@ def write_file(abs_path: Path, content: str):
     abs_path.write_text(content, encoding="utf-8")
 
 
-def validate_files(files: list[GeneratedFile]):
-    if not files:
-        raise ValueError("Model returned zero files.")
+# def validate_files(files: list[GeneratedFile]):
+    # if not files:
+    # raise ValueError("Model returned zero files.")
 
-    names = {Path(f.path).name for f in files}
+    # names = {Path(f.path).name for f in files}
 
-    if not any(n.endswith(".page.ts") for n in names):
-        raise ValueError("Missing .page.ts file")
+    # if not any(n.endswith(".page.ts") for n in names):
+    # raise ValueError("Missing .page.ts file")
 
-    if not any(n.endswith(".page.html") for n in names):
-        raise ValueError("Missing .page.html file")
+    # if not any(n.endswith(".page.html") for n in names):
+    # raise ValueError("Missing .page.html file")
 
-    if not any(n.endswith(".page.scss") for n in names):
-        raise ValueError("Missing .page.scss file")
+    # if not any(n.endswith(".page.scss") for n in names):
+    # raise ValueError("Missing .page.scss file")
 
-
-# --------------------------------------------------
-# PROMPT
-# --------------------------------------------------
-
-def login_prompt() -> str:
-    return """
-You are generating code for an EXISTING Ionic Angular app using the latest Angular + Ionic patterns.
-
-GOAL:
-Create a minimal proof-of-concept Login page implemented as an Ionic page using:
-
-- Angular standalone component (standalone: true)
-- Ionic standalone components
-- Reactive Forms (FormBuilder/FormGroup)
-- Angular control flow syntax (@if)
-- Email + password fields
-- Validators: required + email
-- Disable submit button when invalid
-- Simple submit handler that logs the form value
-
-UI:
-- ion-header / ion-toolbar / ion-title
-- ion-content
-- ion-item
-- ion-input
-- ion-button
-- ion-text
-
-OUTPUT FORMAT (STRICT):
-
-Return ONLY JSON with this structure:
-
-{
-  "files": [
-    { "path": "src/app/pages/login/login.page.ts", "content": "..." },
-    { "path": "src/app/pages/login/login.page.html", "content": "..." },
-    { "path": "src/app/pages/login/login.page.scss", "content": "..." }
-    { "path": "src/app/pages/login/login.page.spec.ts", "content": "..." }
-  ],
-  "notes": "optional"
-}
-
-RULES:
-- No markdown fences
-- No text outside JSON
-- Must compile in an Angular Ionic project
-""".strip()
+    # if not any(n.endswith(".page.spec.ts") for n in names):
+    # raise ValueError("Missing .page.spec.ts file")
 
 
 # --------------------------------------------------
 # MAIN GENERATION LOGIC
 # --------------------------------------------------
-
 SCRIPT_PATH = Path(__file__).resolve()
 PROJECT_ROOT = find_project_root(SCRIPT_PATH)
 
@@ -126,7 +71,7 @@ def main():
 
     files = [GeneratedFile(**f) for f in payload["files"]]
 
-    validate_files(files)
+    validate_files(files, "page")
 
     for f in files:
         write_file(PROJECT_ROOT / f.path, f.content)

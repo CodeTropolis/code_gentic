@@ -1,9 +1,30 @@
-.error-text {
+:host {
   display: block;
-  margin: 6px 16px 12px;
 }
 
-.error-text p {
-  margin: 0;
-  font-size: 0.875rem;
+.field {
+  margin-bottom: 14px;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.field__input {
+  --background: rgba(80, 160, 255, 0.12);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --min-height: 40px;
+
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+}
+
+.error {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.85rem;
 }
