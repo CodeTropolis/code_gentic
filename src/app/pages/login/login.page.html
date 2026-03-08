@@ -17,12 +17,12 @@
       ></ion-input>
     </ion-item>
 
-    @if (email?.touched && email?.invalid) {
+    @if (emailCtrl.touched && emailCtrl.invalid) {
       <ion-text color="danger" class="error-text">
-        @if (email?.errors?.['required']) {
+        @if (emailCtrl.errors?.['required']) {
           <p>Email is required.</p>
         }
-        @if (email?.errors?.['email']) {
+        @if (emailCtrl.errors?.['email']) {
           <p>Enter a valid email address.</p>
         }
       </ion-text>
@@ -38,9 +38,9 @@
       ></ion-input>
     </ion-item>
 
-    @if (password?.touched && password?.invalid) {
+    @if (passwordCtrl.touched && passwordCtrl.invalid) {
       <ion-text color="danger" class="error-text">
-        @if (password?.errors?.['required']) {
+        @if (passwordCtrl.errors?.['required']) {
           <p>Password is required.</p>
         }
       </ion-text>
@@ -49,8 +49,8 @@
     <ion-button
       type="submit"
       expand="block"
-      class="ion-margin-top"
       [disabled]="form.invalid"
+      class="ion-margin-top"
     >
       Sign in
     </ion-button>
