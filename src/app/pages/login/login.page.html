@@ -17,12 +17,12 @@
       ></ion-input>
     </ion-item>
 
-    @if (emailCtrl.touched && emailCtrl.invalid) {
+    @if (isInvalid('email')) {
       <ion-text color="danger" class="error-text">
-        @if (emailCtrl.errors?.['required']) {
+        @if (form.controls.email.errors?.['required']) {
           <p>Email is required.</p>
         }
-        @if (emailCtrl.errors?.['email']) {
+        @if (form.controls.email.errors?.['email']) {
           <p>Enter a valid email address.</p>
         }
       </ion-text>
@@ -38,19 +38,17 @@
       ></ion-input>
     </ion-item>
 
-    @if (passwordCtrl.touched && passwordCtrl.invalid) {
+    @if (isInvalid('password')) {
       <ion-text color="danger" class="error-text">
-        @if (passwordCtrl.errors?.['required']) {
-          <p>Password is required.</p>
-        }
+        <p>Password is required.</p>
       </ion-text>
     }
 
     <ion-button
+      class="ion-margin-top"
       type="submit"
       expand="block"
       [disabled]="form.invalid"
-      class="ion-margin-top"
     >
       Sign in
     </ion-button>
