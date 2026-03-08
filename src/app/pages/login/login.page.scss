@@ -1,5 +1,13 @@
-.error {
+.error-text {
   display: block;
   margin: 6px 16px 12px;
+}
+
+.error-text p {
+  margin: 0;
   font-size: 0.875rem;
+}
+
+.submit-btn {
+  margin-top: 16px;
 }

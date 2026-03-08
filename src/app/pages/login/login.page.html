@@ -5,49 +5,50 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-list lines="full">
-      <ion-item>
-        <ion-input
-          label="Email"
-          labelPlacement="stacked"
-          type="email"
-          inputmode="email"
-          autocomplete="email"
-          formControlName="email"
-        ></ion-input>
-      </ion-item>
-      @if ((submitted || loginForm.controls.email.touched) && loginForm.controls.email.invalid) {
-        <ion-text color="danger" class="error">
-          @if (loginForm.controls.email.errors?.['required']) {
-            <span>Email is required.</span>
-          } @else if (loginForm.controls.email.errors?.['email']) {
-            <span>Enter a valid email.</span>
-          }
-        </ion-text>
-      }
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-input
+        label="Email"
+        labelPlacement="stacked"
+        type="email"
+        inputmode="email"
+        autocomplete="email"
+        formControlName="email"
+      ></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-input
-          label="Password"
-          labelPlacement="stacked"
-          type="password"
-          autocomplete="current-password"
-          formControlName="password"
-        ></ion-input>
-      </ion-item>
-      @if ((submitted || loginForm.controls.password.touched) && loginForm.controls.password.invalid) {
-        <ion-text color="danger" class="error">
-          <span>Password is required.</span>
-        </ion-text>
-      }
-    </ion-list>
+    @if (emailCtrl.touched && emailCtrl.invalid) {
+      <ion-text color="danger" class="error-text">
+        @if (emailCtrl.errors?.['required']) {
+          <p>Email is required.</p>
+        }
+        @if (emailCtrl.errors?.['email']) {
+          <p>Enter a valid email address.</p>
+        }
+      </ion-text>
+    }
+
+    <ion-item>
+      <ion-input
+        label="Password"
+        labelPlacement="stacked"
+        type="password"
+        autocomplete="current-password"
+        formControlName="password"
+      ></ion-input>
+    </ion-item>
+
+    @if (passwordCtrl.touched && passwordCtrl.invalid) {
+      <ion-text color="danger" class="error-text">
+        <p>Password is required.</p>
+      </ion-text>
+    }
 
     <ion-button
       type="submit"
       expand="block"
-      class="ion-margin-top"
-      [disabled]="loginForm.invalid"
+      [disabled]="form.invalid"
+      class="submit-btn"
     >
       Sign in
     </ion-button>

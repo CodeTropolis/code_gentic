@@ -6,7 +6,6 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonList,
   IonItem,
   IonInput,
   IonButton,
@@ -23,7 +22,6 @@ import {
     IonToolbar,
     IonTitle,
     IonContent,
-    IonList,
     IonItem,
     IonInput,
     IonButton,
@@ -35,21 +33,25 @@ import {
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
 
-  submitted = false;
-
-  readonly loginForm = this.fb.nonNullable.group({
+  readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
 
   onSubmit(): void {
-    this.submitted = true;
-
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
 
-    console.log('Login form value:', this.loginForm.getRawValue());
+    console.log('Login form submit:', this.form.getRawValue());
+  }
+
+  get emailCtrl() {
+    return this.form.controls.email;
+  }
+
+  get passwordCtrl() {
+    return this.form.controls.password;
   }
 }
