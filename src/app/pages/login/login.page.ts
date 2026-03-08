@@ -33,10 +33,18 @@ import {
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
 
-  readonly form = this.fb.nonNullable.group({
+  readonly form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -44,14 +52,6 @@ export class LoginPage {
       return;
     }
 
-    console.log('Login form submit:', this.form.getRawValue());
-  }
-
-  get emailCtrl() {
-    return this.form.controls.email;
-  }
-
-  get passwordCtrl() {
-    return this.form.controls.password;
+    console.log('Login submit:', this.form.value);
   }
 }

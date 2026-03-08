@@ -96,6 +96,7 @@ Return ONLY JSON with this structure:
     { "path": "src/app/pages/login/login.page.ts", "content": "..." },
     { "path": "src/app/pages/login/login.page.html", "content": "..." },
     { "path": "src/app/pages/login/login.page.scss", "content": "..." }
+    { "path": "src/app/pages/login/login.page.spec.ts", "content": "..." }
   ],
   "notes": "optional"
 }
