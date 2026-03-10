@@ -33,16 +33,18 @@ import {
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
 
-  readonly form = this.fb.group({
+  readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
 
-  get emailCtrl() {
+  didSubmit = false;
+
+  get email() {
     return this.form.controls.email;
   }
 
-  get passwordCtrl() {
+  get password() {
     return this.form.controls.password;
   }
 
@@ -51,9 +53,6 @@ export class LoginPage {
       this.form.markAllAsTouched();
       return;
     }
-
-    // Proof-of-concept: log the form value
-    // eslint-disable-next-line no-console
-    console.log('Login submit:', this.form.value);
+    this.didSubmit = true;
   }
 }

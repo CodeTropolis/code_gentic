@@ -8,7 +8,7 @@ describe('LoginPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginPage]
+      imports: [LoginPage],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);
@@ -22,36 +22,38 @@ describe('LoginPage', () => {
 
   it('should initialize form with email and password controls', () => {
     expect(component.form).toBeTruthy();
-    expect(component.form.contains('email')).toBeTrue();
-    expect(component.form.contains('password')).toBeTrue();
+    expect(component.email).toBeTruthy();
+    expect(component.password).toBeTruthy();
   });
 
   it('should be invalid when empty', () => {
     component.form.setValue({ email: '', password: '' });
     expect(component.form.invalid).toBeTrue();
+    expect(component.email.hasError('required')).toBeTrue();
+    expect(component.password.hasError('required')).toBeTrue();
   });
 
   it('should validate email format', () => {
     component.form.setValue({ email: 'not-an-email', password: 'secret' });
     expect(component.form.invalid).toBeTrue();
-    expect(component.emailCtrl.errors?.['email']).toBeTrue();
+    expect(component.email.hasError('email')).toBeTrue();
   });
 
   it('should disable submit button when form is invalid', () => {
     component.form.setValue({ email: '', password: '' });
     fixture.detectChanges();
 
-    const btnDe = fixture.debugElement.query(By.css('ion-button'));
-    expect(btnDe).toBeTruthy();
-    expect(btnDe.nativeElement.disabled).toBeTrue();
+    const buttonDe = fixture.debugElement.query(By.css('ion-button'));
+    expect(buttonDe).toBeTruthy();
+    expect(buttonDe.nativeElement.disabled).toBeTrue();
   });
 
   it('should enable submit button when form is valid', () => {
-    component.form.setValue({ email: 'a@b.com', password: 'secret' });
+    component.form.setValue({ email: 'test@example.com', password: 'secret' });
     fixture.detectChanges();
 
-    const btnDe = fixture.debugElement.query(By.css('ion-button'));
-    expect(btnDe.nativeElement.disabled).toBeFalse();
+    const buttonDe = fixture.debugElement.query(By.css('ion-button'));
+    expect(buttonDe.nativeElement.disabled).toBeFalse();
   });
 
   it('onSubmit should mark all as touched and not log when invalid', () => {
@@ -68,7 +70,7 @@ describe('LoginPage', () => {
   it('onSubmit should log form value when valid', () => {
     const logSpy = spyOn(console, 'log');
 
-    component.form.setValue({ email: 'test@example.com', password: 'pw123456' });
+    component.form.setValue({ email: 'test@example.com', password: 'secret' });
     component.onSubmit();
 
     expect(component.form.valid).toBeTrue();
@@ -76,6 +78,6 @@ describe('LoginPage', () => {
 
     const args = logSpy.calls.mostRecent().args;
     expect(args[0]).toContain('Login submit');
-    expect(args[1]).toEqual({ email: 'test@example.com', password: 'pw123456' });
+    expect(args[1]).toEqual({ email: 'test@example.com', password: 'secret' });
   });
 });

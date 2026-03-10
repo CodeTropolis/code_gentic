@@ -9,11 +9,15 @@ Create a minimal proof-of-concept Login page implemented as an Ionic page using:
 - Angular standalone component (standalone: true)
 - Ionic standalone components
 - Reactive Forms (FormBuilder/FormGroup)
+- Input fields should have rounded corners, a light border, and some space between them
+- Input field background should be a light blue, semitransparent color
+- Input field height should be around 40px with some left and right padding
 - Angular control flow syntax (@if)
 - Email + password fields
 - Validators: required + email
 - Disable submit button when invalid
 - Simple submit handler that logs the form value
+- Take advantage of SCSS nested selectors for styling
 
 UI:
 - ion-header / ion-toolbar / ion-title
@@ -31,7 +35,7 @@ Return ONLY JSON with this structure:
   "files": [
     { "path": "src/app/pages/login/login.page.ts", "content": "..." },
     { "path": "src/app/pages/login/login.page.html", "content": "..." },
-    { "path": "src/app/pages/login/login.page.scss", "content": "..." }
+    { "path": "src/app/pages/login/login.page.scss", "content": "..." },
     { "path": "src/app/pages/login/login.page.spec.ts", "content": "..." }
   ],
   "notes": "optional"
@@ -40,9 +44,6 @@ Return ONLY JSON with this structure:
 RULES:
 - No markdown fences
 - No text outside JSON
-- Input fields should have rounded corners, a light border, and some space between them
-- Input field background should be a light blue, semitransparent color
-- Input field height should be around 40px with some left and right padding
 - Must compile in an Angular Ionic project
-- 80 percent code coverage in the spec file
+- Eighty percent code coverage in the spec file
 """.strip()

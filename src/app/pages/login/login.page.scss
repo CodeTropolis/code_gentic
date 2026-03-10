@@ -1,30 +1,67 @@
-:host {
-  display: block;
+ion-content {
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
 }
 
-.field {
-  margin-bottom: 14px;
-}
+.login {
+  max-width: 520px;
+  margin: 0 auto;
 
-.field__label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 0.95rem;
-}
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
 
-.field__input {
-  --background: rgba(80, 160, 255, 0.12);
-  --border-radius: 12px;
-  --padding-start: 12px;
-  --padding-end: 12px;
-  --min-height: 40px;
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
-  border: 1px solid rgba(0, 0, 0, 0.14);
-  border-radius: 12px;
-}
+    ion-label {
+      font-size: 14px;
+      color: var(--ion-color-step-600, #666);
+    }
 
-.error {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.85rem;
+    .text-input {
+      --background: rgba(120, 180, 255, 0.18);
+      --padding-start: 12px;
+      --padding-end: 12px;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      --border-radius: 12px;
+      --highlight-height: 0;
+
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 12px;
+      min-height: 40px;
+
+      &.ion-touched.ion-invalid {
+        border-color: rgba(var(--ion-color-danger-rgb, 235, 68, 90), 0.55);
+      }
+
+      &.ion-touched.ion-valid {
+        border-color: rgba(var(--ion-color-success-rgb, 45, 211, 111), 0.35);
+      }
+    }
+
+    .error {
+      font-size: 12px;
+      line-height: 1.2;
+
+      span {
+        display: inline-block;
+      }
+    }
+  }
+
+  ion-button {
+    margin-top: 6px;
+  }
+
+  .hint {
+    font-size: 12px;
+  }
 }

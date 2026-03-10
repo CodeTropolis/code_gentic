@@ -35,25 +35,6 @@ def write_file(abs_path: Path, content: str):
     abs_path.write_text(content, encoding="utf-8")
 
 
-# def validate_files(files: list[GeneratedFile]):
-    # if not files:
-    # raise ValueError("Model returned zero files.")
-
-    # names = {Path(f.path).name for f in files}
-
-    # if not any(n.endswith(".page.ts") for n in names):
-    # raise ValueError("Missing .page.ts file")
-
-    # if not any(n.endswith(".page.html") for n in names):
-    # raise ValueError("Missing .page.html file")
-
-    # if not any(n.endswith(".page.scss") for n in names):
-    # raise ValueError("Missing .page.scss file")
-
-    # if not any(n.endswith(".page.spec.ts") for n in names):
-    # raise ValueError("Missing .page.spec.ts file")
-
-
 # --------------------------------------------------
 # MAIN GENERATION LOGIC
 # --------------------------------------------------
@@ -63,6 +44,8 @@ PROJECT_ROOT = find_project_root(SCRIPT_PATH)
 
 def main():
     print("Generating login page...")
+    print("SCRIPT PATH:", SCRIPT_PATH)
+    print("PROJECT ROOT:", PROJECT_ROOT)
 
     raw = generate(login_prompt())
     raw = strip_markdown_fences(raw)
