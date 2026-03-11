@@ -11,7 +11,7 @@ def generate(prompt):
         model=MODEL,
         input=[{"role": "user", "content": prompt}],
         temperature=0.2,
-        max_output_tokens=2500,
+        max_output_tokens=12000,
     )
 
     return resp.output_text

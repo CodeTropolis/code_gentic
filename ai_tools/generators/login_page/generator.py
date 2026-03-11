@@ -6,25 +6,23 @@ and write the files into the Angular project.
 
 Run from project root:
 
-    python -m ai_tools.login.generate_login_screen
+    python -m ai_tools.generators.login_page.generator
 """
 
 import json
 from pathlib import Path
 
-from ai_tools.login.prompt import login_prompt
+from ai_tools.generators.login_page.prompt import login_prompt
 from ai_tools.types.generated_file import GeneratedFile
+from ai_tools.utils.paths import PROJECT_ROOT
 from ai_tools.utils.strip_markdown_fences import strip_markdown_fences
 from ai_tools.utils.write_file import write_file
 from ai_tools.utils.validate_files import validate_files
-from ai_tools.utils.project_root import find_project_root
 from ai_tools.utils.openai_client import generate
 
 # --------------------------------------------------
 # MAIN GENERATION LOGIC
 # --------------------------------------------------
-SCRIPT_PATH = Path(__file__).resolve()
-PROJECT_ROOT = find_project_root(SCRIPT_PATH)
 
 
 def main():

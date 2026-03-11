@@ -1,11 +1,15 @@
-.login {
-  padding: 16px;
+:host {
+  display: block;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
+.page {
+  padding: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 
   .field {
     display: flex;
@@ -14,30 +18,50 @@
 
     ion-label {
       font-size: 0.95rem;
+      color: var(--ion-color-step-600, #4b5563);
     }
 
-    ion-input {
-      --background: rgba(120, 170, 255, 0.18);
+    .input {
+      --background: rgba(173, 216, 230, 0.35);
       --border-radius: 12px;
       --padding-start: 12px;
       --padding-end: 12px;
-      --padding-top: 10px;
-      --padding-bottom: 10px;
-      --highlight-height: 0px;
+      --min-height: 40px;
 
-      border: 1px solid rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(0, 0, 0, 0.12);
       border-radius: 12px;
-      min-height: 40px;
+
+      &.ion-touched.ion-invalid {
+        border-color: rgba(var(--ion-color-danger-rgb), 0.7);
+      }
+
+      &.ion-touched.ion-valid {
+        border-color: rgba(var(--ion-color-success-rgb), 0.5);
+      }
     }
 
     .error {
-      display: block;
       font-size: 0.85rem;
       line-height: 1.2;
+    }
+  }
 
-      span {
-        display: inline-block;
-      }
+  .output {
+    margin-top: 8px;
+
+    pre {
+      margin: 8px 0 0;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.04);
+      overflow: auto;
+      font-size: 0.85rem;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
     }
   }
 }

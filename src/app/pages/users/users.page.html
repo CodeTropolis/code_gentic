@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="users-list" lines="none">
+    @if (listType === 'users') {
+      @for (user of users; track trackById($index, user)) {
+        <ion-item class="list-row" button detail="false">
+          <div class="avatar" aria-hidden="true">
+            <img [src]="user.photoUrl" [alt]="user.name" loading="lazy" />
+          </div>
+
+          <ion-label>
+            <div class="primary">{{ user.name }}</div>
+            <div class="secondary">{{ user.email }}</div>
+          </ion-label>
+
+          <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+        </ion-item>
+      }
+    } @else if (listType === 'contacts') {
+      @for (contact of contacts; track trackById($index, contact)) {
+        <ion-item class="list-row" button detail="false">
+          <ion-label>
+            <div class="primary">{{ contact.name }}</div>
+            <div class="secondary">{{ contact.phone }}</div>
+          </ion-label>
+
+          <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+        </ion-item>
+      }
+    } @else {
+      @for (row of blankRows; track trackById($index, row)) {
+        <ion-item class="list-row blank" button detail="false">
+          <ion-label>&nbsp;</ion-label>
+          <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+        </ion-item>
+      }
+    }
+  </ion-list>
+</ion-content>

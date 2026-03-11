@@ -17,6 +17,8 @@ Create a minimal proof-of-concept Login page implemented as an Ionic page using:
 - Validators: required + email
 - Disable submit button when invalid
 - Simple submit handler that logs the form value
+- Template should show the output of the form value as JSON for demonstration purposes
+- The template should hide the output until the form is valid and submitted
 - Take advantage of SCSS nested selectors for styling
 
 UI:
