@@ -1,36 +1,43 @@
 .login {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  padding: 16px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
 
   .field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 
     ion-label {
-      font-weight: 600;
+      font-size: 0.95rem;
     }
 
-    .text-input {
-      --background: rgba(120, 180, 255, 0.18);
+    ion-input {
+      --background: rgba(120, 170, 255, 0.18);
       --border-radius: 12px;
       --padding-start: 12px;
       --padding-end: 12px;
-      --min-height: 40px;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      --highlight-height: 0px;
 
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.18);
       border-radius: 12px;
-
-      // Ensure the host element has the intended height
       min-height: 40px;
-      display: flex;
-      align-items: center;
     }
 
     .error {
+      display: block;
       font-size: 0.85rem;
       line-height: 1.2;
+
+      span {
+        display: inline-block;
+      }
     }
   }
 }

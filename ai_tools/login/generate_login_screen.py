@@ -10,7 +10,6 @@ Run from project root:
 """
 
 import json
-import re
 from pathlib import Path
 
 from ai_tools.login.prompt import login_prompt
@@ -30,12 +29,9 @@ PROJECT_ROOT = find_project_root(SCRIPT_PATH)
 
 def main():
     print("Generating login page...")
-    print("SCRIPT PATH:", SCRIPT_PATH)
-    print("PROJECT ROOT:", PROJECT_ROOT)
 
     raw = generate(login_prompt())
     raw = strip_markdown_fences(raw)
-
     payload = json.loads(raw)
 
     files = [GeneratedFile(**f) for f in payload["files"]]

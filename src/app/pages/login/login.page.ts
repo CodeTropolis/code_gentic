@@ -33,7 +33,7 @@ import {
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
 
-  readonly form = this.fb.group({
+  readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
@@ -52,8 +52,8 @@ export class LoginPage {
       return;
     }
 
-    // Minimal POC: log form value
+    // POC: log form value
     // eslint-disable-next-line no-console
-    console.log('Login submit:', this.form.value);
+    console.log('Login submit:', this.form.getRawValue());
   }
 }
