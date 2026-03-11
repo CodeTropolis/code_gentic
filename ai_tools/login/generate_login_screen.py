@@ -15,25 +15,11 @@ from pathlib import Path
 
 from ai_tools.login.prompt import login_prompt
 from ai_tools.types.generated_file import GeneratedFile
+from ai_tools.utils.strip_markdown_fences import strip_markdown_fences
+from ai_tools.utils.write_file import write_file
 from ai_tools.utils.validate_files import validate_files
 from ai_tools.utils.project_root import find_project_root
 from ai_tools.utils.openai_client import generate
-
-
-# --------------------------------------------------
-# HELPERS
-# --------------------------------------------------
-
-def strip_markdown_fences(text: str) -> str:
-    """Remove ``` fences if the model returns them."""
-    text = re.sub(r"```[a-zA-Z]*\n?", "", text)
-    return text.replace("```", "").strip()
-
-
-def write_file(abs_path: Path, content: str):
-    abs_path.parent.mkdir(parents=True, exist_ok=True)
-    abs_path.write_text(content, encoding="utf-8")
-
 
 # --------------------------------------------------
 # MAIN GENERATION LOGIC
