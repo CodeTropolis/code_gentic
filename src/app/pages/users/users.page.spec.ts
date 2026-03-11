@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { UsersPage } from './users.page';
 
 describe('UsersPage', () => {
-  let component: UsersPage;
   let fixture: ComponentFixture<UsersPage>;
+  let component: UsersPage;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,33 +20,42 @@ describe('UsersPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render a list of rows', () => {
-    const items = fixture.debugElement.queryAll(By.css('ion-item.list-row'));
-    expect(items.length).toBeGreaterThan(0);
+  it('should render the title', () => {
+    const titleEl: HTMLElement | null = fixture.nativeElement.querySelector('ion-title');
+    expect(titleEl?.textContent?.trim()).toBe('Users');
   });
 
-  it('should render correct row count for users list', () => {
-    expect(component.listType).toBe('users');
-    const items = fixture.debugElement.queryAll(By.css('ion-item.list-row'));
+  it('should render a row for each user', () => {
+    const items = fixture.debugElement.queryAll(By.css('ion-item.row'));
     expect(items.length).toBe(component.users.length);
   });
 
-  it('each row should include a chevron icon in the end slot', () => {
-    const icons = fixture.debugElement.queryAll(By.css('ion-item.list-row ion-icon[slot="end"][name="chevron-forward-outline"]'));
-    expect(icons.length).toBe(component.users.length);
+  it('each row should include name, email, avatar image, and chevron icon', () => {
+    const items = fixture.debugElement.queryAll(By.css('ion-item.row'));
+    expect(items.length).toBeGreaterThan(0);
+
+    for (const item of items) {
+      const name = item.query(By.css('.name'));
+      const email = item.query(By.css('.email'));
+      const img = item.query(By.css('.avatar img'));
+      const chevron = item.query(By.css('ion-icon[slot="end"][name="chevron-forward-outline"]'));
+
+      expect(name).withContext('name missing').toBeTruthy();
+      expect((name.nativeElement as HTMLElement).textContent?.trim().length).toBeGreaterThan(0);
+
+      expect(email).withContext('email missing').toBeTruthy();
+      expect((email.nativeElement as HTMLElement).textContent?.trim().length).toBeGreaterThan(0);
+
+      expect(img).withContext('avatar image missing').toBeTruthy();
+      const src = (img.nativeElement as HTMLImageElement).getAttribute('src') || '';
+      expect(src.length).toBeGreaterThan(0);
+
+      expect(chevron).withContext('chevron icon missing').toBeTruthy();
+    }
   });
 
-  it('users rows should include avatar image, name, and email', () => {
-    const firstItem = fixture.debugElement.query(By.css('ion-item.list-row'));
-    expect(firstItem).toBeTruthy();
-
-    const img = firstItem.query(By.css('.avatar img'));
-    expect(img).toBeTruthy();
-
-    const primary = firstItem.query(By.css('ion-label .primary'));
-    const secondary = firstItem.query(By.css('ion-label .secondary'));
-
-    expect(primary.nativeElement.textContent.trim().length).toBeGreaterThan(0);
-    expect(secondary.nativeElement.textContent.trim()).toContain('@');
+  it('should use trackById for stable tracking', () => {
+    const u = component.users[0];
+    expect(component.trackById(0, u)).toBe(u.id);
   });
 });

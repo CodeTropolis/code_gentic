@@ -10,26 +10,16 @@ import {
   IonLabel,
   IonIcon
 } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { chevronForwardOutline } from 'ionicons/icons';
 
-type ListType = 'users' | 'contacts' | 'blank';
-
-interface UserRow {
+type User = {
   id: number;
   name: string;
   email: string;
   photoUrl: string;
-}
-
-interface ContactRow {
-  id: number;
-  name: string;
-  phone: string;
-}
+};
 
 @Component({
-  selector: 'app-users-page',
+  selector: 'app-users',
   standalone: true,
   imports: [
     CommonModule,
@@ -46,9 +36,9 @@ interface ContactRow {
   styleUrls: ['./users.page.scss']
 })
 export class UsersPage {
-  readonly listType: ListType = 'users';
+  readonly title = 'Users';
 
-  readonly users: UserRow[] = [
+  readonly users: User[] = [
     {
       id: 1,
       name: 'Ethan Walker',
@@ -57,8 +47,8 @@ export class UsersPage {
     },
     {
       id: 2,
-      name: 'Mia Johnson',
-      email: 'mia.johnson@example.com',
+      name: 'Ava Johnson',
+      email: 'ava.johnson@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/women/2.jpg'
     },
     {
@@ -69,8 +59,8 @@ export class UsersPage {
     },
     {
       id: 4,
-      name: 'Ava Chen',
-      email: 'ava.chen@example.com',
+      name: 'Mia Chen',
+      email: 'mia.chen@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/women/4.jpg'
     },
     {
@@ -78,35 +68,14 @@ export class UsersPage {
       name: 'Liam Patel',
       email: 'liam.patel@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/men/5.jpg'
+    },
+    {
+      id: 6,
+      name: 'Sophia Davis',
+      email: 'sophia.davis@example.com',
+      photoUrl: 'https://randomuser.me/api/portraits/women/6.jpg'
     }
   ];
 
-  readonly contacts: ContactRow[] = [
-    { id: 1, name: 'Jordan Reed', phone: '(555) 123-4567' },
-    { id: 2, name: 'Taylor Brooks', phone: '(555) 987-6543' },
-    { id: 3, name: 'Casey Morgan', phone: '(555) 222-8899' }
-  ];
-
-  readonly blankRows = Array.from({ length: 6 }, (_, i) => ({ id: i + 1 }));
-
-  constructor() {
-    addIcons({ chevronForwardOutline });
-  }
-
-  get title(): string {
-    switch (this.listType) {
-      case 'users':
-        return 'Users';
-      case 'contacts':
-        return 'Contacts';
-      case 'blank':
-        return 'List';
-      default:
-        return 'List';
-    }
-  }
-
-  trackById<T extends { id: number }>(_: number, item: T): number {
-    return item.id;
-  }
+  trackById = (_: number, user: User) => user.id;
 }

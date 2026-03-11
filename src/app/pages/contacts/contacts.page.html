@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="contacts-list" lines="none">
+    @for (contact of contacts; track trackById) {
+      <ion-item class="contact-row" button detail="false">
+        <ion-label>
+          <div class="primary">{{ contact.name }}</div>
+          <div class="secondary">{{ contact.phone }}</div>
+        </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+      </ion-item>
+    }
+  </ion-list>
+</ion-content>

@@ -14,6 +14,7 @@ from ai_tools.generators.list_page.prompt import list_prompt
 from ai_tools.types.generated_file import GeneratedFile
 from ai_tools.utils.openai_client import generate
 from ai_tools.utils.project_root import find_project_root
+from ai_tools.utils.spinner import Spinner
 from ai_tools.utils.strip_markdown_fences import strip_markdown_fences
 from ai_tools.utils.validate_files import validate_files
 from ai_tools.utils.write_file import write_file
@@ -36,7 +37,8 @@ def generate_list_page():
 
     prompt = list_prompt(list_type)
 
-    print("\nGenerating page...\n")
+    spinner = Spinner()
+    spinner.start()
 
     content = generate(prompt)
 
@@ -68,6 +70,7 @@ def generate_list_page():
         abs_path = root / file.path
         write_file(abs_path, file.content)
 
+    spinner.stop()
     print("\n✅ List page generated successfully\n")
 
     if "notes" in data:

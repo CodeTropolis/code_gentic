@@ -40,7 +40,7 @@ ICON POSITION:
 
 LIST TYPE RULES
 
-1️⃣ USERS LIST
+USERS LIST
 
 If the list type is **users**:
 
@@ -72,7 +72,7 @@ email
 
 --------------------------------
 
-2️⃣ CONTACTS LIST
+CONTACTS LIST
 
 If the list type is **contacts**:
 
@@ -94,7 +94,20 @@ phone number
 
 --------------------------------
 
-3️⃣ BLANK LIST
+PRODUCT LIST
+
+If the list type is **products**:
+
+Use a CDN for product photos such as:
+
+https://via.placeholder.com/50  
+https://via.placeholder.com/50
+
+Generate several mock products.
+
+--------------------------------
+
+BLANK LIST
 
 If the list type is **blank list** or **blank rows**:
 
