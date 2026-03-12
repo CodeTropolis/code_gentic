@@ -20,18 +20,17 @@ describe('ProductsPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render a list of products', () => {
-    const items = fixture.debugElement.queryAll(By.css('ion-list.products-list ion-item.row'));
-    expect(items.length).toBeGreaterThan(0);
+  it('should have 6 mock products', () => {
+    expect(component.products.length).toBe(6);
   });
 
-  it('should render the correct row count', () => {
-    const items = fixture.debugElement.queryAll(By.css('ion-list.products-list ion-item.row'));
+  it('should render a row for each product', () => {
+    const items = fixture.debugElement.queryAll(By.css('ion-item.product-item'));
     expect(items.length).toBe(component.products.length);
   });
 
-  it('each row should include a chevron icon in the end slot', () => {
-    const icons = fixture.debugElement.queryAll(By.css('ion-item.row ion-icon[slot="end"][name="chevron-forward-outline"]'));
+  it('each row should include a right chevron icon in the end slot', () => {
+    const icons = fixture.debugElement.queryAll(By.css('ion-item.product-item ion-icon[slot="end"][name="chevron-forward-outline"]'));
     expect(icons.length).toBe(component.products.length);
   });
 
@@ -39,6 +38,6 @@ describe('ProductsPage', () => {
     const first = component.products[0];
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
     expect(text).toContain(first.name);
-    expect(text).toContain(first.price);
+    expect(text).toMatch(/\$\s?\d/);
   });
 });

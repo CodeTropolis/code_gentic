@@ -5,33 +5,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-list class="products-list">
-    @for (product of products; track trackById) {
-      <ion-item class="row" lines="none" button="true">
+  <ion-list class="products-list" lines="none">
+    @for (product of products; track trackById($index, product)) {
+      <ion-item class="product-item" button detail="false">
         <div class="thumb" aria-hidden="true">
           <img [src]="product.imageUrl" [alt]="product.name" loading="lazy" />
         </div>
 
         <ion-label>
-          <div class="title">{{ product.name }}</div>
+          <div class="name">{{ product.name }}</div>
           <div class="meta">
-            <span class="desc">{{ product.description }}</span>
-            <span class="price">{{ product.price }}</span>
+            <span class="description">{{ product.description }}</span>
+            <span class="price">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
           </div>
         </ion-label>
 
-        <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-      </ion-item>
-    }
-
-    @if (products.length === 0) {
-      <ion-item class="row" lines="none">
-        <ion-label>
-          <div class="title">No products</div>
-          <div class="meta">
-            <span class="desc">Add mock data to see rows.</span>
-          </div>
-        </ion-label>
         <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
       </ion-item>
     }

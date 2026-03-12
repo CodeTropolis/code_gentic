@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Blank</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="blank-list" lines="none">
+    @for (row of rows; track trackById($index, row)) {
+      <ion-item class="blank-row" button detail="false">
+        <ion-label>&nbsp;</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+      </ion-item>
+    }
+  </ion-list>
+</ion-content>

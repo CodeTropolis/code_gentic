@@ -1,47 +1,41 @@
 :host {
-  --row-bg: #475569; /* slate */
-  --row-border: #334155; /* darker slate */
-  --row-text: #f8fafc; /* near-white */
-  --row-subtext: rgba(248, 250, 252, 0.85);
+  --row-bg: #475569;
+  --row-border: #334155;
+  --row-text: #f8fafc;
+  --row-subtext: #e2e8f0;
 }
 
 .products-list {
   padding: 12px;
 
-  .row {
+  .product-item {
     --background: var(--row-bg);
     --color: var(--row-text);
+    --inner-padding-end: 12px;
+    --inner-padding-start: 12px;
     --padding-start: 12px;
     --padding-end: 12px;
-    --inner-padding-end: 12px;
     --min-height: 72px;
 
     margin: 10px 0;
     border: 1px solid var(--row-border);
     border-radius: 12px;
 
-    ion-icon {
-      color: var(--row-text);
-      font-size: 18px;
-      opacity: 0.95;
-    }
-
     .thumb {
       width: 50px;
       height: 50px;
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       flex: 0 0 50px;
       margin-right: 12px;
-      border: 1px solid rgba(15, 23, 42, 0.35);
-      background: rgba(15, 23, 42, 0.15);
-      display: grid;
-      place-items: center;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.06);
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
         display: block;
       }
     }
@@ -49,36 +43,43 @@
     ion-label {
       margin: 0;
 
-      .title {
-        font-weight: 600;
+      .name {
+        font-weight: 700;
         letter-spacing: 0.2px;
         color: var(--row-text);
+        margin-bottom: 4px;
       }
 
       .meta {
-        margin-top: 4px;
         display: flex;
         gap: 10px;
         align-items: baseline;
         justify-content: space-between;
 
-        .desc {
+        .description {
           color: var(--row-subtext);
           font-size: 13px;
           line-height: 1.2;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
           overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          max-width: 70%;
+          flex: 1 1 auto;
+          padding-right: 8px;
         }
 
         .price {
           color: var(--row-text);
-          font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
           white-space: nowrap;
+          flex: 0 0 auto;
         }
       }
+    }
+
+    ion-icon {
+      color: rgba(248, 250, 252, 0.9);
+      font-size: 18px;
     }
   }
 }

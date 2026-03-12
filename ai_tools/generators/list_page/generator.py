@@ -46,9 +46,9 @@ def generate_list_page():
     content = strip_markdown_fences(content)
 
     # Debug output to diagnose JSON issues
-    print("\n----- RAW LLM OUTPUT (first 1500 chars) -----\n")
-    print(content[:1500])
-    print("\n---------------------------------------------\n")
+    # print("\n----- RAW LLM OUTPUT (first 1500 chars) -----\n")
+    # print(content[:1500])
+    # print("\n---------------------------------------------\n")
 
     try:
         if not content.strip().endswith("}"):

@@ -98,13 +98,91 @@ PRODUCT LIST
 
 If the list type is **products**:
 
-Use a CDN for product photos such as:
+Generate 6 mock ecommerce products.
 
-https://via.placeholder.com/50  
-https://via.placeholder.com/50
+Each product must contain the following fields:
 
-Generate several mock products.
+- id
+- name
+- description
+- price
+- imageUrl
 
+Choose one product category from the following list for each product:
+
+- shoes
+- headphones
+- backpack
+- laptop
+- smartwatch
+- sunglasses
+
+The product name MUST match the category.
+
+For example:
+- shoes → running shoes, trail sneakers
+- headphones → wireless headphones, studio headphones
+- backpack → travel backpack, laptop backpack
+- laptop → ultrabook laptop, developer laptop
+- smartwatch → fitness smartwatch, sport smartwatch
+- sunglasses → polarized sunglasses, aviator sunglasses
+
+--------------------------------
+
+Use the following product images for each category.
+
+Do NOT generate new URLs.
+Use the exact URL that corresponds to the category.
+
+shoes:
+https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=50&h=50&fit=crop
+
+headphones:
+https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=50&h=50&fit=crop
+
+backpack:
+https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=50&h=50&fit=crop
+
+laptop:
+https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=50&h=50&fit=crop
+
+smartwatch:
+https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=50&h=50&fit=crop
+
+sunglasses:
+https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=50&h=50&fit=crop
+
+--------------------------------
+
+Rules:
+
+- The imageUrl MUST match the category.
+- Do NOT generate new image URLs.
+- Only use the provided URLs.
+- Generate realistic ecommerce product names and descriptions.
+- Prices should look realistic (example: 59.99, 129.00).
+
+--------------------------------
+
+Return ONLY valid JSON.
+
+The JSON must be a single array of product objects.
+
+Example format:
+
+[
+  {{
+    "id": 1,
+    "name": "Lightweight Running Shoes",
+    "description": "Breathable running shoes designed for everyday comfort.",
+    "price": 89.99,
+    "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=50&h=50&fit=crop"
+  }}
+]
+
+Do not include explanations.
+Do not include markdown.
+Only return JSON.
 --------------------------------
 
 BLANK LIST
