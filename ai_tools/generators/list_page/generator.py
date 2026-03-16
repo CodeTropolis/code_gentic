@@ -19,6 +19,8 @@ from ai_tools.utils.strip_markdown_fences import strip_markdown_fences
 from ai_tools.utils.validate_files import validate_files
 from ai_tools.utils.write_file import write_file
 
+# Receive input from user concerning the type of list page to generate.
+
 
 def ask_list_type() -> str:
     print("\nWhat type of list would you like to generate?\n")
@@ -33,13 +35,17 @@ def ask_list_type() -> str:
 
 def generate_list_page():
 
+    # A variable to hold the list type (e.g. "users", "contacts", "products", etc.)
     list_type = ask_list_type()
 
+    # Grab the prompt from the prompt.py file,
+    # passing in the list type to customize it.
     prompt = list_prompt(list_type)
 
     spinner = Spinner()
     spinner.start()
 
+    # Call the generate function, passing in the prompt, to get the LLM's response.
     content = generate(prompt)
 
     # Remove ```json ``` wrappers if model adds them
@@ -50,6 +56,8 @@ def generate_list_page():
     # print(content[:1500])
     # print("\n---------------------------------------------\n")
 
+    # Attempt to parse the LLM's response as JSON.
+    # If it fails, print an error message and exit.
     try:
         if not content.strip().endswith("}"):
             print("\n❌ LLM output appears truncated\n")
@@ -61,6 +69,17 @@ def generate_list_page():
         return
 
     files = [GeneratedFile(**f) for f in data["files"]]
+    # This syntax is a shorthand for creating a list of
+    # GeneratedFile objects from the JSON data.
+    # Here's the long-hand version:
+
+    # files = []
+    # for f in data["files"]:
+    #     generated_file = GeneratedFile(
+    #         path=f["path"],
+    #         content=f["content"]
+    #     )
+    #     files.append(generated_file)
 
     validate_files(files, "page")
 

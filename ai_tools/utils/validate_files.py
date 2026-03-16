@@ -9,6 +9,9 @@ REQUIRED_FILES = {
 }
 
 
+# Validates that the list of files returned by the LLM
+# Includes all required files for the
+# specified artifact type (e.g. "page", "component", "service").
 def validate_files(files: list["GeneratedFile"], artifact: str):
     if not files:
         raise ValueError("Model returned zero files.")

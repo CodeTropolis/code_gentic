@@ -1,8 +1,6 @@
 from openai import OpenAI
 import os
 
-from ai_tools.generators.login_page import prompt
-
 MODEL = os.getenv("OPENAI_MODEL", "gpt-5.2")
 client = OpenAI()
 
@@ -17,6 +15,12 @@ client = OpenAI()
 # )
 
 # return resp.output_text
+
+# ----------------------------------------------------
+
+# This version biases the model behavior towards
+# producing code by including a system message that
+# defines the assistant's role and expertise.
 
 
 def generate(prompt: str) -> str:
