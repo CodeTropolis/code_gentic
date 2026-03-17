@@ -10,7 +10,6 @@
       <div class="field">
         <ion-label>Email</ion-label>
         <ion-input
-          class="input"
           type="email"
           inputmode="email"
           autocomplete="email"
@@ -18,7 +17,7 @@
           placeholder="you@example.com"
         ></ion-input>
 
-        @if (submitted && emailCtrl.invalid) {
+        @if (emailCtrl.touched && emailCtrl.invalid) {
           <ion-text color="danger" class="error">
             @if (emailCtrl.errors?.['required']) { <span>Email is required.</span> }
             @if (emailCtrl.errors?.['email']) { <span>Please enter a valid email.</span> }
@@ -29,30 +28,22 @@
       <div class="field">
         <ion-label>Password</ion-label>
         <ion-input
-          class="input"
           type="password"
           autocomplete="current-password"
           formControlName="password"
           placeholder="Your password"
         ></ion-input>
 
-        @if (submitted && passwordCtrl.invalid) {
+        @if (passwordCtrl.touched && passwordCtrl.invalid) {
           <ion-text color="danger" class="error">
-            <span>Password is required.</span>
+            @if (passwordCtrl.errors?.['required']) { <span>Password is required.</span> }
           </ion-text>
         }
       </div>
 
-      <ion-button type="submit" expand="block" [disabled]="form.invalid">Sign in</ion-button>
-
-      @if (submitted && form.valid && submittedValue) {
-        <div class="output">
-          <ion-text>
-            <h3>Submitted value</h3>
-            <pre>{{ submittedValue | json }}</pre>
-          </ion-text>
-        </div>
-      }
+      <ion-button type="submit" expand="block" [disabled]="form.invalid">
+        Sign in
+      </ion-button>
     </form>
   </div>
 </ion-content>

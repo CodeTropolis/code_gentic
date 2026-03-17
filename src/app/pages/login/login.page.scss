@@ -21,23 +21,18 @@
       color: var(--ion-color-step-600, #4b5563);
     }
 
-    .input {
+    ion-input {
       --background: rgba(173, 216, 230, 0.35);
-      --border-radius: 12px;
       --padding-start: 12px;
       --padding-end: 12px;
-      --min-height: 40px;
+      --border-radius: 12px;
+      --border-width: 1px;
+      --border-style: solid;
+      --border-color: rgba(0, 0, 0, 0.12);
+      --highlight-height: 0;
 
-      border: 1px solid rgba(0, 0, 0, 0.12);
+      min-height: 40px;
       border-radius: 12px;
-
-      &.ion-touched.ion-invalid {
-        border-color: rgba(var(--ion-color-danger-rgb), 0.7);
-      }
-
-      &.ion-touched.ion-valid {
-        border-color: rgba(var(--ion-color-success-rgb), 0.5);
-      }
     }
 
     .error {

@@ -20,72 +20,78 @@ describe('LoginPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with invalid form', () => {
-    expect(component.form).toBeTruthy();
+  it('should start with invalid form and disabled submit button', () => {
     expect(component.form.invalid).toBeTrue();
-    expect(component.submitted).toBeFalse();
-    expect(component.submittedValue).toBeNull();
-  });
 
-  it('should disable submit button when form is invalid', () => {
     const btnDe = fixture.debugElement.query(By.css('ion-button'));
     expect(btnDe).toBeTruthy();
     expect(btnDe.nativeElement.disabled).toBeTrue();
   });
 
-  it('should not set submittedValue when submitting invalid form', () => {
-    const logSpy = spyOn(console, 'log');
+  it('should validate email required + email format', () => {
+    const email = component.emailCtrl;
 
-    component.form.setValue({ email: '', password: '' });
-    component.onSubmit();
+    email.setValue('');
+    email.markAsTouched();
+    fixture.detectChanges();
+    expect(email.hasError('required')).toBeTrue();
 
-    expect(component.submitted).toBeTrue();
-    expect(component.form.invalid).toBeTrue();
-    expect(component.submittedValue).toBeNull();
-    expect(logSpy).not.toHaveBeenCalled();
+    email.setValue('not-an-email');
+    fixture.detectChanges();
+    expect(email.hasError('email')).toBeTrue();
+
+    email.setValue('test@example.com');
+    fixture.detectChanges();
+    expect(email.valid).toBeTrue();
   });
 
-  it('should submit and log value when form is valid', () => {
-    const logSpy = spyOn(console, 'log');
+  it('should require password', () => {
+    const password = component.passwordCtrl;
 
-    component.form.setValue({ email: 'test@example.com', password: 'secret' });
+    password.setValue('');
+    password.markAsTouched();
+    fixture.detectChanges();
+    expect(password.hasError('required')).toBeTrue();
+
+    password.setValue('secret');
+    fixture.detectChanges();
+    expect(password.valid).toBeTrue();
+  });
+
+  it('should enable submit when form is valid and log on submit', () => {
+    const spy = spyOn(console, 'log');
+
+    component.form.setValue({
+      email: 'user@example.com',
+      password: 'pw123456',
+    });
+    fixture.detectChanges();
+
     expect(component.form.valid).toBeTrue();
 
-    component.onSubmit();
+    const btnDe = fixture.debugElement.query(By.css('ion-button'));
+    expect(btnDe.nativeElement.disabled).toBeFalse();
 
-    expect(component.submitted).toBeTrue();
-    expect(component.submittedValue).toEqual({ email: 'test@example.com', password: 'secret' });
-    expect(logSpy).toHaveBeenCalledTimes(1);
-    expect(logSpy.calls.mostRecent().args[0]).toBe('Login submit:');
-    expect(logSpy.calls.mostRecent().args[1]).toEqual({ email: 'test@example.com', password: 'secret' });
+    component.onSubmit();
+    expect(spy).toHaveBeenCalled();
+
+    const [msg, payload] = spy.calls.mostRecent().args;
+    expect(msg).toContain('Login submit');
+    expect(payload).toEqual({ email: 'user@example.com', password: 'pw123456' });
   });
 
-  it('should show output only after valid submit', () => {
-    // Initially hidden
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('.output'))).toBeNull();
+  it('should not log when submitting invalid form', () => {
+    const spy = spyOn(console, 'log');
 
-    // Submit invalid -> still hidden
-    component.form.setValue({ email: '', password: '' });
+    component.form.setValue({
+      email: '',
+      password: '',
+    });
+    fixture.detectChanges();
+
+    expect(component.form.invalid).toBeTrue();
+
     component.onSubmit();
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('.output'))).toBeNull();
-
-    // Submit valid -> visible
-    component.form.setValue({ email: 'valid@example.com', password: 'pw' });
-    component.onSubmit();
-    fixture.detectChanges();
-
-    const output = fixture.debugElement.query(By.css('.output'));
-    expect(output).toBeTruthy();
-
-    const pre = fixture.debugElement.query(By.css('.output pre'));
-    expect(pre).toBeTruthy();
-    expect((pre.nativeElement.textContent as string) || '').toContain('valid@example.com');
-  });
-
-  it('getters should return controls', () => {
-    expect(component.emailCtrl).toBe(component.form.controls.email);
-    expect(component.passwordCtrl).toBe(component.form.controls.password);
+    expect(spy).not.toHaveBeenCalled();
   });
 });
