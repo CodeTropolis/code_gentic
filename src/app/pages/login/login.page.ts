@@ -39,7 +39,6 @@ export class LoginPage {
     password: ['', [Validators.required]]
   });
 
-<<<<<<< HEAD
   submitted = false;
   submittedValue: { email: string; password: string } | null = null;
 
@@ -57,8 +56,6 @@ export class LoginPage {
     console.log('Login submit:', this.submittedValue);
   }
 
-=======
->>>>>>> d6ecda3 (Revision to login.page.* and style change.)
   get emailCtrl() {
     return this.form.controls.email;
   }
@@ -66,14 +63,5 @@ export class LoginPage {
   get passwordCtrl() {
     return this.form.controls.password;
   }
-<<<<<<< HEAD
-=======
 
-  onSubmit(): void {
-    if (this.form.invalid) return;
-    // Minimal POC: log form value
-    // eslint-disable-next-line no-console
-    console.log('Login submit:', this.form.getRawValue());
-  }
->>>>>>> d6ecda3 (Revision to login.page.* and style change.)
 }
