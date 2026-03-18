@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list class="users-list" lines="none">
-    @for (user of users; track user.id) {
+    @for (user of users; track trackById) {
       <ion-item class="users-list__item" button detail="false">
         <div class="users-list__avatar" aria-hidden="true">
           <img [src]="user.photoUrl" [alt]="user.name" loading="lazy" />

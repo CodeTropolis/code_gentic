@@ -1,9 +1,8 @@
- :root {
-    --color-primary:  #2E5F94;
-    --color-primary-light:  #4A76A7;
-    --color-secondary:  #7E9CB8;
-
-    --color-surface:  #B4C4CF;
-    --color-muted:  #91A8B0;
-    --color-text:  #6E8091;
+.blue-theme {
+  --ion-color-primary: #007aff;
+  --ion-color-primary-rgb: 0,122,255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #006ae0;
+  --ion-color-primary-tint: #1a86ff;
 }

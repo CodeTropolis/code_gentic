@@ -1,0 +1,46 @@
+.dark-theme {
+  /* Backgrounds */
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18,18,18;
+
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255,255,255;
+
+  /* Surfaces */
+  --ion-color-step-50: #1e1e1e;
+  --ion-color-step-100: #2a2a2a;
+  --ion-color-step-150: #353535;
+  --ion-color-step-200: #404040;
+
+  /* Primary (your blue, tuned for dark mode) */
+  --ion-color-primary: #4da3ff;
+  --ion-color-primary-rgb: 77,163,255;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0,0,0;
+  --ion-color-primary-shade: #438fe0;
+  --ion-color-primary-tint: #62afff;
+
+  /* Secondary (cooler accent for dark) */
+  --ion-color-secondary: #7dc1ff;
+  --ion-color-secondary-rgb: 125,193,255;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0,0,0;
+  --ion-color-secondary-shade: #6eaade;
+  --ion-color-secondary-tint: #8ac9ff;
+
+  /* Borders & UI */
+  --ion-border-color: #2c2c2c;
+
+  /* Cards / items */
+  --ion-card-background: #1e1e1e;
+  --ion-item-background: #1e1e1e;
+
+  /* Toolbar */
+  --ion-toolbar-background: #1e1e1e;
+  --ion-toolbar-color: #ffffff;
+
+  /* Tab bar */
+  --ion-tab-bar-background: #1e1e1e;
+  --ion-tab-bar-color: #aaaaaa;
+  --ion-tab-bar-color-selected: var(--ion-color-primary);
+}

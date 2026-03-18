@@ -1,7 +1,3 @@
-from ai_tools.utils.load_theme import load_theme
-
-theme_scss = load_theme("blue")
-
 
 def list_prompt(list_type: str) -> str:
     return f"""
@@ -209,18 +205,12 @@ STYLING for ALL LIST TYPES
 Use SCSS nested selectors.
 
 Ensure:
-
-- proper spacing between rows
-- clean Ionic layout
-- modern minimal styling
+- Proper spacing between rows
+- Clean Ionic layout
+- Modern minimal styling
 - 12px padding inside each row
-- Use ONLY the CSS variables defined in THEME VARIABLES (var(--color-*))
 - Do NOT hardcode hex values
-- The SCSS file MUST begin with: @use '../../../theme/blue/colors.scss' as *;
 - Each row must have an all around border that is slightly darker than the background color
-
-THEME VARIABLES:
-{theme_scss}
 
 --------------------------------
 
