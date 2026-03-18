@@ -10,6 +10,8 @@ import {
   IonLabel,
   IonIcon
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { chevronForwardOutline } from 'ionicons/icons';
 
 type User = {
   id: number;
@@ -36,46 +38,48 @@ type User = {
   styleUrls: ['./users.page.scss']
 })
 export class UsersPage {
-  readonly title = 'Users';
-
   readonly users: User[] = [
     {
       id: 1,
-      name: 'Ethan Walker',
-      email: 'ethan.walker@example.com',
+      name: 'Alex Johnson',
+      email: 'alex.johnson@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/men/1.jpg'
     },
     {
       id: 2,
-      name: 'Ava Johnson',
-      email: 'ava.johnson@example.com',
+      name: 'Maya Patel',
+      email: 'maya.patel@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/women/2.jpg'
     },
     {
       id: 3,
-      name: 'Noah Martinez',
-      email: 'noah.martinez@example.com',
+      name: 'Chris Lee',
+      email: 'chris.lee@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/men/3.jpg'
     },
     {
       id: 4,
-      name: 'Mia Chen',
-      email: 'mia.chen@example.com',
+      name: 'Sofia Garcia',
+      email: 'sofia.garcia@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/women/4.jpg'
     },
     {
       id: 5,
-      name: 'Liam Patel',
-      email: 'liam.patel@example.com',
+      name: 'Noah Williams',
+      email: 'noah.williams@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/men/5.jpg'
     },
     {
       id: 6,
-      name: 'Sophia Davis',
-      email: 'sophia.davis@example.com',
+      name: 'Emma Brown',
+      email: 'emma.brown@example.com',
       photoUrl: 'https://randomuser.me/api/portraits/women/6.jpg'
     }
   ];
 
-  trackById = (_: number, user: User) => user.id;
+  constructor() {
+    addIcons({ chevronForwardOutline });
+  }
+
+  trackByUserId = (_: number, user: User) => user.id;
 }

@@ -1,3 +1,8 @@
+from ai_tools.utils.load_theme import load_theme
+
+theme_scss = load_theme("blue")
+
+
 def list_prompt(list_type: str) -> str:
     return f"""
 You are generating code for an EXISTING Ionic Angular application using modern Angular + Ionic patterns.
@@ -209,8 +214,13 @@ Ensure:
 - clean Ionic layout
 - modern minimal styling
 - 12px padding inside each row
-- each row must have a slate gray background with contrasting text
-- each row must have an all around border that is slightly darker than the background color
+- Use ONLY the CSS variables defined in THEME VARIABLES (var(--color-*))
+- Do NOT hardcode hex values
+- The SCSS file MUST begin with: @use '../../../theme/blue/colors.scss' as *;
+- Each row must have an all around border that is slightly darker than the background color
+
+THEME VARIABLES:
+{theme_scss}
 
 --------------------------------
 

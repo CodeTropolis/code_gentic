@@ -1,66 +1,64 @@
+@use '../../../theme/blue/colors.scss' as *;
+
 :host {
-  --row-bg: #475569; /* slate */
-  --row-border: #334155; /* darker slate */
-  --row-text: #f8fafc;
-  --row-subtext: rgba(248, 250, 252, 0.85);
+  display: block;
 }
 
 .users-list {
   padding: 12px;
 
-  .row {
-    --background: var(--row-bg);
-    --color: var(--row-text);
-    --inner-padding-end: 12px;
-    --inner-padding-start: 12px;
+  &__item {
+    --background: var(--color-surface);
+    --color: var(--color-text);
     --padding-start: 12px;
     --padding-end: 12px;
+    --inner-padding-end: 12px;
+    --min-height: 74px;
 
-    margin: 10px 0;
-    border: 1px solid var(--row-border);
+    margin-bottom: 10px;
+    border: 1px solid var(--color-muted);
     border-radius: 12px;
 
-    .avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 8px;
-      overflow: hidden;
-      flex: 0 0 50px;
-      margin-right: 12px;
-      background: rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-    }
-
-    .text {
-      margin: 0;
-
-      .name {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 1.2;
-        color: var(--row-text);
-      }
-
-      .email {
-        margin-top: 4px;
-        font-size: 13px;
-        line-height: 1.2;
-        color: var(--row-subtext);
-      }
-    }
-
     ion-icon {
-      color: rgba(248, 250, 252, 0.9);
+      color: var(--color-muted);
       font-size: 18px;
     }
+  }
+
+  &__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-muted);
+    margin-right: 12px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__label {
+    margin: 0;
+  }
+
+  &__name {
+    color: var(--color-primary);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__email {
+    margin-top: 4px;
+    color: var(--color-text);
+    font-size: 13px;
+    line-height: 1.2;
   }
 }

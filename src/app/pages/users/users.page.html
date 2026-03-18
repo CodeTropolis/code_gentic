@@ -1,20 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ title }}</ion-title>
+    <ion-title>Users</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list class="users-list">
-    @for (user of users; track trackById) {
-      <ion-item class="row" lines="none">
-        <div class="avatar" aria-hidden="true">
+  <ion-list class="users-list" lines="none">
+    @for (user of users; track trackByUserId) {
+      <ion-item class="users-list__item" button detail="false">
+        <div class="users-list__avatar" aria-hidden="true">
           <img [src]="user.photoUrl" [alt]="user.name" loading="lazy" />
         </div>
 
-        <ion-label class="text">
-          <div class="name">{{ user.name }}</div>
-          <div class="email">{{ user.email }}</div>
+        <ion-label class="users-list__label">
+          <div class="users-list__name">{{ user.name }}</div>
+          <div class="users-list__email">{{ user.email }}</div>
         </ion-label>
 
         <ion-icon slot="end" name="chevron-forward-outline" aria-hidden="true"></ion-icon>
