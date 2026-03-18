@@ -8,42 +8,58 @@
   <div class="page">
     <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="field">
-        <ion-label>Email</ion-label>
-        <ion-input
-          type="email"
-          inputmode="email"
-          autocomplete="email"
-          formControlName="email"
-          placeholder="you@example.com"
-        ></ion-input>
+        <ion-label class="label">Email</ion-label>
+        <ion-item class="input-item" lines="none">
+          <ion-input
+            formControlName="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            [clearInput]="true"
+          ></ion-input>
+        </ion-item>
 
-        @if (emailCtrl.touched && emailCtrl.invalid) {
-          <ion-text color="danger" class="error">
-            @if (emailCtrl.errors?.['required']) { <span>Email is required.</span> }
-            @if (emailCtrl.errors?.['email']) { <span>Please enter a valid email.</span> }
+        @if (submitted && emailCtrl.invalid) {
+          <ion-text class="error" color="danger">
+            @if (emailCtrl.errors?.['required']) {
+              <p>Email is required.</p>
+            }
+            @if (emailCtrl.errors?.['email']) {
+              <p>Enter a valid email address.</p>
+            }
           </ion-text>
         }
       </div>
 
       <div class="field">
-        <ion-label>Password</ion-label>
-        <ion-input
-          type="password"
-          autocomplete="current-password"
-          formControlName="password"
-          placeholder="Your password"
-        ></ion-input>
+        <ion-label class="label">Password</ion-label>
+        <ion-item class="input-item" lines="none">
+          <ion-input
+            formControlName="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Your password"
+          ></ion-input>
+        </ion-item>
 
-        @if (passwordCtrl.touched && passwordCtrl.invalid) {
-          <ion-text color="danger" class="error">
-            @if (passwordCtrl.errors?.['required']) { <span>Password is required.</span> }
+        @if (submitted && passwordCtrl.invalid) {
+          <ion-text class="error" color="danger">
+            <p>Password is required.</p>
           </ion-text>
         }
       </div>
 
-      <ion-button type="submit" expand="block" [disabled]="form.invalid">
+      <ion-button class="submit" type="submit" expand="block" [disabled]="form.invalid">
         Sign in
       </ion-button>
+
+      @if (submitted && form.valid && submittedValue) {
+        <ion-text class="output" color="medium">
+          <p class="output-title">Submitted value</p>
+          <pre class="json">{{ submittedValue | json }}</pre>
+        </ion-text>
+      }
     </form>
   </div>
 </ion-content>

@@ -1,15 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { CommonModule, JsonPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonLabel,
-  IonInput,
   IonButton,
-  IonText
+  IonContent,
+  IonHeader,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonText,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -17,26 +18,26 @@ import {
   standalone: true,
   imports: [
     CommonModule,
-    JsonPipe,
     ReactiveFormsModule,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
+    IonItem,
     IonLabel,
     IonInput,
     IonButton,
-    IonText
+    IonText,
   ],
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
   private readonly fb = inject(FormBuilder);
 
-  readonly form = this.fb.nonNullable.group({
+  readonly form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
+    password: ['', [Validators.required]],
   });
 
   submitted = false;
@@ -47,10 +48,11 @@ export class LoginPage {
 
     if (this.form.invalid) {
       this.submittedValue = null;
+      this.form.markAllAsTouched();
       return;
     }
 
-    this.submittedValue = this.form.getRawValue();
+    this.submittedValue = this.form.getRawValue() as { email: string; password: string };
     // Proof-of-concept: log the form value
     // eslint-disable-next-line no-console
     console.log('Login submit:', this.submittedValue);
@@ -63,5 +65,4 @@ export class LoginPage {
   get passwordCtrl() {
     return this.form.controls.password;
   }
-
 }

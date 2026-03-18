@@ -8,7 +8,7 @@ describe('LoginPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginPage]
+      imports: [LoginPage],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);
@@ -20,78 +20,94 @@ describe('LoginPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should start with invalid form and disabled submit button', () => {
+  it('should initialize with invalid form and disabled submit button', () => {
     expect(component.form.invalid).toBeTrue();
 
-    const btnDe = fixture.debugElement.query(By.css('ion-button'));
-    expect(btnDe).toBeTruthy();
-    expect(btnDe.nativeElement.disabled).toBeTrue();
+    const buttonDe = fixture.debugElement.query(By.css('ion-button.submit'));
+    expect(buttonDe).toBeTruthy();
+    expect(buttonDe.nativeElement.disabled).toBeTrue();
   });
 
-  it('should validate email required + email format', () => {
+  it('should validate email required and email format', () => {
     const email = component.emailCtrl;
 
     email.setValue('');
-    email.markAsTouched();
-    fixture.detectChanges();
-    expect(email.hasError('required')).toBeTrue();
+    expect(email.invalid).toBeTrue();
+    expect(email.errors?.['required']).toBeTrue();
 
     email.setValue('not-an-email');
-    fixture.detectChanges();
-    expect(email.hasError('email')).toBeTrue();
+    expect(email.invalid).toBeTrue();
+    expect(email.errors?.['email']).toBeTrue();
 
-    email.setValue('test@example.com');
-    fixture.detectChanges();
+    email.setValue('user@example.com');
     expect(email.valid).toBeTrue();
   });
 
-  it('should require password', () => {
+  it('should validate password required', () => {
     const password = component.passwordCtrl;
 
     password.setValue('');
-    password.markAsTouched();
-    fixture.detectChanges();
-    expect(password.hasError('required')).toBeTrue();
+    expect(password.invalid).toBeTrue();
+    expect(password.errors?.['required']).toBeTrue();
 
     password.setValue('secret');
-    fixture.detectChanges();
     expect(password.valid).toBeTrue();
   });
 
-  it('should enable submit when form is valid and log on submit', () => {
-    const spy = spyOn(console, 'log');
+  it('should not submit when invalid and should mark as submitted', () => {
+    const logSpy = spyOn(console, 'log');
 
-    component.form.setValue({
-      email: 'user@example.com',
-      password: 'pw123456',
-    });
+    component.form.patchValue({ email: '', password: '' });
+    component.onSubmit();
+
+    expect(component.submitted).toBeTrue();
+    expect(component.submittedValue).toBeNull();
+    expect(component.form.invalid).toBeTrue();
+    expect(logSpy).not.toHaveBeenCalled();
+  });
+
+  it('should submit when valid, log value, and show output in template', () => {
+    const logSpy = spyOn(console, 'log');
+
+    component.form.setValue({ email: 'user@example.com', password: 'secret' });
+    fixture.detectChanges();
+
+    const buttonDe = fixture.debugElement.query(By.css('ion-button.submit'));
+    expect(buttonDe.nativeElement.disabled).toBeFalse();
+
+    component.onSubmit();
     fixture.detectChanges();
 
     expect(component.form.valid).toBeTrue();
+    expect(component.submitted).toBeTrue();
+    expect(component.submittedValue).toEqual({ email: 'user@example.com', password: 'secret' });
+    expect(logSpy).toHaveBeenCalledWith('Login submit:', { email: 'user@example.com', password: 'secret' });
 
-    const btnDe = fixture.debugElement.query(By.css('ion-button'));
-    expect(btnDe.nativeElement.disabled).toBeFalse();
-
-    component.onSubmit();
-    expect(spy).toHaveBeenCalled();
-
-    const [msg, payload] = spy.calls.mostRecent().args;
-    expect(msg).toContain('Login submit');
-    expect(payload).toEqual({ email: 'user@example.com', password: 'pw123456' });
+    const pre = fixture.debugElement.query(By.css('pre.json'));
+    expect(pre).toBeTruthy();
+    expect((pre.nativeElement.textContent as string) || '').toContain('user@example.com');
   });
 
-  it('should not log when submitting invalid form', () => {
-    const spy = spyOn(console, 'log');
+  it('should keep output hidden until valid and submitted', () => {
+    // Initially hidden
+    let pre = fixture.debugElement.query(By.css('pre.json'));
+    expect(pre).toBeNull();
 
-    component.form.setValue({
-      email: '',
-      password: '',
-    });
+    // Submitted but invalid -> still hidden
+    component.form.patchValue({ email: 'bad', password: '' });
+    component.onSubmit();
     fixture.detectChanges();
 
-    expect(component.form.invalid).toBeTrue();
+    pre = fixture.debugElement.query(By.css('pre.json'));
+    expect(pre).toBeNull();
 
-    component.onSubmit();
-    expect(spy).not.toHaveBeenCalled();
+    // Valid but not submitted -> hidden
+    component.submitted = false;
+    component.submittedValue = null;
+    component.form.setValue({ email: 'user@example.com', password: 'secret' });
+    fixture.detectChanges();
+
+    pre = fixture.debugElement.query(By.css('pre.json'));
+    expect(pre).toBeNull();
   });
 });

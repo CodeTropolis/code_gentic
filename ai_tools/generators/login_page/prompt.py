@@ -9,9 +9,10 @@ Create a minimal proof-of-concept Login page implemented as an Ionic page using:
 - Angular standalone component (standalone: true)
 - Ionic standalone components
 - Reactive Forms (FormBuilder/FormGroup)
-- Input fields should have rounded corners, a light border, and some space between them
-- Input field background should be a light blue, semitransparent color
-- Input field height should be around 40px with some left and right padding
+- Match style of the users page.
+- Ensure all around padding and spacing like that of the users page.
+- Use rounded ion-inputs and ion-button
+- Use a light gray border on the ion-inputs
 - Angular control flow syntax (@if)
 - Email + password fields
 - Validators: required + email
